@@ -1,0 +1,256 @@
+/* --- Configurações Básicas e Reset (MODO ESCURO) --- */
+body {
+    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada para técnico */
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a; /* Fundo escuro para a página inteira */
+    display: flex;
+    justify-content: center; /* Centraliza a folha horizontalmente */
+    align-items: flex-start; /* Alinha no topo */
+    padding-top: 10mm; /* Espaço no topo para visualização */
+    color: #e0e0e0; /* Cor do texto padrão (clara) */
+}
+
+/* --- Estilo Principal da Folha A4 (MODO ESCURO) --- */
+.pagina-a4 {
+    width: 210mm;  /* Largura padrão A4 Portrait */
+    height: 297mm; /* Altura padrão A4 Portrait */
+    background-color: #262626; /* Fundo escuro para a folha */
+    border: 1px solid #444; /* Borda externa da folha (mais clara que o fundo) */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra para profundidade */
+    display: flex;
+    flex-direction: column; /* Organiza as seções verticalmente (Cima -> Baixo) */
+    box-sizing: border-box; /* Garante que padding/border não alterem o tamanho total */
+    overflow: hidden; /* Evita que conteúdo vaze nas proporções fixas */
+}
+
+/* --- Estilo das Seções com Novas Proporções --- */
+
+/* 1. Área do Título e Desenho Técnico (35%) */
+.secao-desenho {
+    height: 35%; /* Proporção de 35% da altura total */
+    width: 100%;
+    padding: 5mm; /* Margem interna */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Organiza o título em cima do desenho */
+    justify-content: flex-start;
+    align-items: center; /* Centraliza horizontalmente */
+}
+
+/* Estilo do Título do Exercício */
+.titulo-exercicio {
+    margin: 0 0 5mm 0; /* Espaço entre o título e o desenho */
+    color: #2196F3;    /* Cor azul para destacar */
+    font-size: 24px;
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center; /* Centraliza o texto */
+}
+
+.moldura-desenho {
+    width: 100%;
+    flex-grow: 1; /* Ocupa todo o espaço vertical restante na secao-desenho */
+    border: 2px solid #555; /* Moldura interna da área de desenho (clara) */
+    background-color: #333; /* Fundo ligeiramente mais claro para a área de desenho */
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    box-sizing: border-box; 
+    overflow: hidden; /* Garante que a imagem não ultrapasse a moldura */
+}
+
+/* Ajuste específico para a imagem do desenho técnico */
+.imagem-desenho {
+    max-width: 90%;  /* Não deixa a imagem ficar mais larga que a moldura, com respiro */
+    max-height: 90%; /* Não deixa a imagem ficar mais alta que a moldura, com respiro */
+    object-fit: contain; /* Garante que a imagem inteira apareça sem distorcer, mantendo proporção */
+    display: block;   /* Remove espaços em branco indesejados abaixo da imagem */
+    filter: brightness(0.9); /* Opcional: Reduz um pouco o brilho do desenho técnico */
+}
+
+/* 2. Seção de Programação CNC (AUMENTADO PARA 55%) */
+.secao-programacao {
+    height: 55%; /* NOVA proporção: 55% da altura total */
+    width: 100%;
+    display: flex; /* Layout flexível horizontal para as 2 colunas */
+    border-top: 2px solid #555; /* Linha divisória clara */
+    border-bottom: 2px solid #555; /* Linha divisória clara */
+    box-sizing: border-box;
+    overflow: hidden; /* Importante para a barra de rolagem interna funcionar */
+}
+
+/* Estilo individual para cada coluna da tabela */
+.coluna-tabela {
+    width: 50%; /* Cada coluna ocupa metade da largura da seção */
+    height: 100%;
+    overflow-y: auto; /* Adiciona barra de rolagem vertical se a tabela crescer */
+    border-right: 1px solid #555; /* Linha divisória fina entre as colunas (clara) */
+    box-sizing: border-box;
+    background-color: #2b2b2b; /* Fundo levemente diferente para contraste */
+}
+
+/* Remove a borda direita da última coluna para não duplicar */
+.coluna-tabela:last-child {
+    border-right: none;
+}
+
+/* --- Estilo das Tabelas CNC (MODO ESCURO) --- */
+.tabela-cnc {
+    width: 100%;
+    border-collapse: collapse; /* Remove espaços entre as bordas das células */
+}
+
+.tabela-cnc thead {
+    position: sticky; /* Mantém o cabeçalho fixo no topo ao rolar */
+    top: 0;
+    background-color: #333; /* Cor de fundo do cabeçalho (escura) */
+    z-index: 10; /* Garante que o cabeçalho fique sobre as linhas */
+}
+
+.tabela-cnc th, 
+.tabela-cnc td {
+    border: 1px solid #555; /* Linhas internas finas (claras) */
+    padding: 4px; /* Padding reduzido para caber mais linhas */
+    text-align: left;
+    font-size: 12px;
+    color: #e0e0e0; /* Texto claro nas células */
+}
+
+.tabela-cnc th {
+    border-bottom: 2px solid #555; /* Linha inferior do cabeçalho mais forte (clara) */
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ccc; /* Texto do cabeçalho claro */
+}
+
+/* Configuração de largura das colunas internas das tabelas */
+.col-numero {
+    width: 25%; /* Coluna estreita para N10, N20... */
+    font-weight: bold;
+    color: #ccc; /* Número da linha claro */
+    background-color: #333; /* Fundo da coluna de número escuro */
+    text-align: center;
+}
+
+.col-programa {
+    width: 75%; /* Coluna larga para o código de programação */
+    cursor: text; /* Muda o cursor para indicar campo editável */
+}
+
+/* Efeito ao clicar para digitar nas células de programação */
+.col-programa[contenteditable="true"]:focus {
+    background-color: #444; /* Fundo ligeiramente mais claro ao focar */
+    outline: 2px solid #2196F3; /* Borda azul ao focar */
+}
+
+/* 3. Seção do Rodapé com Logo (MANTIDO EM 10%) */
+.secao-rodape {
+    height: 10%; /* Proporção de 10% da altura total */
+    width: 100%;
+    padding: 0 10mm; /* Margens laterais */
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between; /* Espaça info à esquerda e logo à direita */
+    align-items: center; /* Alinha verticalmente no centro */
+}
+
+.info-empresa {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #ccc; /* Texto claro no rodapé */
+}
+
+.info-empresa p {
+    margin: 2px 0;
+}
+
+.container-logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo-empresa {
+    max-height: 50px; /* Tamanho controlado da logo */
+    width: auto; /* Mantém a proporção da largura */
+    filter: invert(1) brightness(2); /* CORREÇÃO: Torna a logo preta em branca */
+}
+
+/* --- Configurações Específicas para Impressão (Mantém fundo branco para economizar tinta) --- */
+@media print {
+    body {
+        background-color: #fff; /* Fundo branco para imprimir */
+        color: #000; /* Texto preto para imprimir */
+        padding: 0;
+        margin: 0;
+    }
+
+    .pagina-a4 {
+        background-color: #fff; /* Fundo branco para imprimir */
+        border: none; /* Remove bordas externas e sombras na impressão */
+        box-shadow: none;
+        margin: 0;
+        page-break-after: always; /* Garante que comece em nova página */
+    }
+
+    .secao-desenho, 
+    .secao-programacao, 
+    .secao-rodape {
+        page-break-inside: avoid; /* Evita quebra de página dentro das seções */
+    }
+
+    .titulo-exercicio {
+        color: #000;
+        margin-top: 0;
+    }
+
+    .moldura-desenho {
+        border: 2px solid #000;
+        background-color: #fff;
+    }
+
+    .imagem-desenho {
+        filter: none;
+    }
+
+    .secao-programacao {
+        border-top: 2px solid #000;
+        border-bottom: 2px solid #000;
+    }
+
+    .coluna-tabela {
+        overflow-y: visible; 
+        border-right: 1px solid #000;
+        background-color: #fff;
+    }
+
+    .tabela-cnc th, 
+    .tabela-cnc td {
+        border: 1px solid #000;
+        color: #000;
+    }
+
+    .tabela-cnc th {
+        border-bottom: 2px solid #000;
+        background-color: #eee;
+        color: #000;
+    }
+
+    .col-numero {
+        color: #000;
+        background-color: #eee;
+    }
+
+    .info-empresa {
+        color: #000;
+    }
+
+    .tabela-cnc thead {
+        position: static; /* Remove o cabeçalho fixo na impressão */
+    }
+    
+    .logo-empresa {
+        filter: none; /* Remove o filtro de brilho na impressão */
+    }
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folha de Processo CNC - CADCAM Brasil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="pagina-a4">
+        
+        <div class="secao-desenho">
+            <h1 class="titulo-exercicio">EXERCÍCIO 1</h1> 
+            
+            <div class="moldura-desenho">
+                <img src="desenho.png" alt="Desenho Técnico da Peça" class="imagem-desenho">
+            </div>
+        </div>
+
+        <div class="secao-programacao">
+            
+            <div class="coluna-tabela" id="container-coluna-1">
+                <table class="tabela-cnc">
+                    <thead>
+                        <tr>
+                            <th>Nº Linha</th>
+                            <th>Programação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+
+            <div class="coluna-tabela" id="container-coluna-2">
+                <table class="tabela-cnc">
+                    <thead>
+                        <tr>
+                            <th>Nº Linha</th>
+                            <th>Programação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="secao-rodape">
+            <div class="info-empresa">
+                <p><strong>CADCAM BRASIL</strong></p>
+                <p>Folha de Processo - Programação CNC</p>
+            </div>
+            <div class="container-logo">
+                <img src="logo.png" alt="Logo CADCAM Brasil" class="logo-empresa">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Função para gerar as linhas da tabela CNC
+        function gerarTabelasProgramacao() {
+            // Referências para os corpos das duas tabelas
+            const tbody1 = document.querySelector('#container-coluna-1 tbody');
+            const tbody2 = document.querySelector('#container-coluna-2 tbody');
+
+            // Configurações
+            const inicio = 10;
+            const fimTotal = 500; // Define o fim da numeração em N1200
+            const incremento = 10;
+            const pontoDivisao = 250; // Ponto onde a primeira tabela termina (N600)
+
+            // Função auxiliar para criar uma linha da tabela
+            function criarLinha(numeroLinha) {
+                const tr = document.createElement('tr');
+                
+                const tdNumero = document.createElement('td');
+                tdNumero.className = 'col-numero'; // Classe para estilizar a coluna do número
+                tdNumero.textContent = `N${numeroLinha}`;
+
+                const tdProgramacao = document.createElement('td');
+                tdProgramacao.className = 'col-programa'; // Classe para estilizar a coluna de texto
+                tdProgramacao.contentEditable = true; // Permite digitar na célula
+
+                tr.appendChild(tdNumero);
+                tr.appendChild(tdProgramacao);
+                return tr;
+            }
+
+            // Loop para gerar e distribuir todas as linhas
+            for (let i = inicio; i <= fimTotal; i += incremento) {
+                const novaLinha = criarLinha(i);
+
+                if (i <= pontoDivisao) {
+                    tbody1.appendChild(novaLinha);
+                } else {
+                    tbody2.appendChild(novaLinha);
+                }
+            }
+        }
+
+        // Executar a função assim que a página terminar de carregar
+        window.onload = gerarTabelasProgramacao;
+    </script>
+</body>
+</html>
